@@ -23,9 +23,21 @@ jobs:
         run: |
           # Add your test commands here
 
-  deploy:
+  e2e-test:
     runs-on: ubuntu-latest
     needs: [build, test]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup E2E environment
+        run: |
+          # Add commands to set up your E2E testing environment
+      - name: Run E2E tests
+        run: |
+          # Add commands to run your E2E tests
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build, test, e2e-test]
     steps:
       - uses: actions/checkout@v2
       - name: Deploy
